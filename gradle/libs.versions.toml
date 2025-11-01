@@ -23,9 +23,11 @@ mockitoCore = "5.17.0"
 mockitoKotlin =  "3.2.0"
 mockitoKotlin2 = "2.2.0"
 truth = "1.1.4"
-androidTestJUnit = "1.2.1"
-androidxCoreTest = "1.6.2"
+androidTestJUnit = "1.1.5"
+androidxCoreTest = "1.5.0"
+androidxTestRunner = "1.5.2"
 androidxCoreTesting = "2.2.0"
+espresso-core = "3.5.1"
 
 #DI
 hilt = "2.56.1"
@@ -97,8 +99,8 @@ truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 kotlin-coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxCoreTesting" }
 androidx-test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidxCoreTest" }
-androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxCoreTest" }
-android-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidTestJUnit" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+android-test-junit = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidTestJUnit" }
 compose-testing = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 compose-testing-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
@@ -110,6 +112,8 @@ android-gradleplugin = { group = "com.android.tools.build", name = "gradle", ver
 hilt-gradleplugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 kotlin-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espresso-core" }
 
 [bundles]
 core = [
@@ -143,7 +147,9 @@ testUi = [
     "android-test-junit",
     "compose-testing",
     "compose-testing-manifest",
-    "androidx-test-runner"
+    "androidx-test-runner",
+    "espresso-core",
+    "espresso-idling-resource",
 ]
 
 [plugins]

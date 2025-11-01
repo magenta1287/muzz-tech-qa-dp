@@ -1,11 +1,27 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("app-plugin")
 }
 
+// Load properties from local.properties
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+
 android {
     namespace = "com.test.muzz"
+
+    defaultConfig {
+        // Make the credentials available as build config fields
+        buildConfigField("String", "TEST_USER", localProperties.getProperty("test.user", ""))
+        buildConfigField("String", "TEST_PASS", localProperties.getProperty("test.pass", ""))
+    }
 }
 
 dependencies {

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Muzz</string>
+
+    <string name="login_user_name_hint">Nom d\'utilisateur</string>
+    <string name="login_password_hint">Mot de passe</string>
+    <string name="login_button_text">Connexion</string>
+    <string name="login_wrong_user_name_error">Nom d\'utilisateur incorrect</string>
+    <string name="login_wrong_password_error">Mot de passe incorrect</string>
+    <string name="login_unknown_error">Erreur inconnue</string>
+    <string name="muzz_failed_to_load_message">Échec du chargement des profils</string>
+    <string name="muzz_item_author_prefix">Par</string>
+    <string name="muzz_item_source_prefix">Source:</string>
+</resources>
