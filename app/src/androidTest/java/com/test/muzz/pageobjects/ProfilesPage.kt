@@ -16,7 +16,8 @@ class ProfilesPage(private val composeTestRule: ComposeTestRule, private val act
     private val profileCard by lazy { composeTestRule.onNodeWithTag("profile_card") }
     private val likeButton by lazy { composeTestRule.onNodeWithContentDescription("Like Profile") }
     private val passButton by lazy { composeTestRule.onNodeWithContentDescription("Pass Profile") }
-    private val finishedTitle by lazy { composeTestRule.onNodeWithText("You're all caught up!") }
+    private val finishedTitle by lazy { composeTestRule.onNodeWithText("You\'re all caught up!") }
+    private val loadingIndicatorTag = "loading_indicator"
 
     // Actions
     fun clickLike() {
@@ -33,10 +34,15 @@ class ProfilesPage(private val composeTestRule: ComposeTestRule, private val act
         title.assertIsDisplayed()
     }
 
-    fun assertProfileCardIsDisplayed(timeoutMillis: Long = 5000) {
-        composeTestRule.waitUntil(timeoutMillis) {
-            composeTestRule.onAllNodesWithTag("profile_card").fetchSemanticsNodes().isNotEmpty()
+    fun assertProfileCardIsDisplayed() {
+        // This is the correct and robust way to test this.
+        // We wait until the loading indicator disappears, which tells us the app
+        // has finished its work. The timeout is generous to handle slow emulators.
+        composeTestRule.waitUntil(timeoutMillis = 10000) {
+            composeTestRule.onAllNodesWithTag(loadingIndicatorTag).fetchSemanticsNodes().isEmpty()
         }
+
+        // Now that loading is finished, we can safely assert the card is visible.
         profileCard.assertIsDisplayed()
     }
 

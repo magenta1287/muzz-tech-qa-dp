@@ -7,7 +7,10 @@
     <string name="login_wrong_user_name_error">Wrong user name</string>
     <string name="login_wrong_password_error">Wrong password</string>
     <string name="login_unknown_error">Wrong password</string>
+    <string name="login_tagline">Where Muslims Marry</string>
+
     <string name="muzz_failed_to_load_message">Failed to load profiles</string>
+    <string name="retry_button_text">Retry</string>
     <string name="muzz_item_author_prefix">By</string>
     <string name="muzz_item_source_prefix">Source:</string>
 </resources>
