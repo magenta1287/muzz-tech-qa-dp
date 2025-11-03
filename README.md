@@ -26,6 +26,11 @@ You can run them in one of the following ways:
 *   **Run a specific test class:**
     Open a test file (e.g., `LoginTests.kt`) and click the green play button next to the class name to run all tests within that file.
 
+## Key Files & Evidence
+
+*   **Test Execution Summary:** A complete summary of all manual and automated testing and bugs found is in  test_execution_summary.md at the root of the project.
+*   **Screenshots and Videos:** All supporting screen recordings and screenshots for bug reports are located in the `attachments/` directory.
+
 ## Automation Tooling
 I chose to use **Jetpack Compose testing framework** for the automated tests. The primary reason for this choice is that the application's UI is built with Jetpack Compose. Using the native testing framework provides direct access to the `ComposeTestRule` and a rich set of APIs for finding UI elements, performing actions, and making assertions, which leads to more robust, reliable, and less flaky tests.
 
