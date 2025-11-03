@@ -1,93 +1,38 @@
-# Muzz QA Technical Test
-## Congratulations, you have reached the next stage which is a technical test.
-##### Please create your own repo and share the solution with us.
+# Muzz QA Technical Test - Solution
 
-### Description
-Let’s start!
+This repository contains the solution for the Muzz QA Technical Test. It includes automated tests for the login and profile discovery features, as well as a test_execution_summary.md with a summary of all the tests carried out and the bugs found.
 
-We are in the middle of the sprint and the following tasks were just moved to the QA testing column on our board, Manual team have tested and now want Automation to automate the following scenarios:
+## How to Build and Run the App
 
-##
-### 1 - As a user I want to log in to the app
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/magenta1287/muzz-tech-qa-dp.git
+    ```
+2.  **Open in Android Studio:**
+    Open the cloned project in a recent version of Android Studio.
+3.  **Sync and Build:**
+    Let Gradle sync and build the project.
+4.  **Run the App:**
+    Select the `app` run configuration and run it on an emulator or a physical device. A recent Google Pixel emulator (e.g., Pixel 9a) is recommended.
 
-Given - The user opens the app for the first time (when not logged in yet)
+## How to Run the Automated Tests
 
-Then - The login screen with user name and password entries and login button is displayed
+The automated tests are located in the `app/src/androidTest/java/com/test/muzz/tests` directory.
 
-#### Scenario 2 - User login failed
+You can run them in one of the following ways:
 
-Given - The user provided wrong user name and/or password
+*   **Run all tests:**
+    Right-click on the `tests` package (`app/src/androidTest/java/com/test/muzz/tests`) in the Project view and select "Run tests in 'com.test.muzz.tests'".
+*   **Run a specific test class:**
+    Open a test file (e.g., `LoginTests.kt`) and click the green play button next to the class name to run all tests within that file.
 
-When - The Login button is clicked
+## Automation Tooling
+I chose to use **Jetpack Compose testing framework** for the automated tests. The primary reason for this choice is that the application's UI is built with Jetpack Compose. Using the native testing framework provides direct access to the `ComposeTestRule` and a rich set of APIs for finding UI elements, performing actions, and making assertions, which leads to more robust, reliable, and less flaky tests.
 
-Then - The error markers are displayed by user name and/or password entries
+## Design Pattern
+I implemented the **Page Object Model (POM)** pattern to create a clear separation between the test logic and the UI interaction details.
 
-#### Scenario 3 - User login succeed (credentials provided below)
+*   **Page Objects (`pageobjects` directory):** These classes (`LoginPage.kt`, `ProfilesPage.kt`) encapsulate the UI elements and the actions that can be performed on a specific screen. This makes the tests more readable and easier to maintain. If the UI changes, only the relevant page object needs to be updated, not the test logic itself.
+*   **Tests (`tests` directory):** The test classes (e.g., `LoginTests.kt`) use the methods from the page objects to perform actions and assert outcomes, keeping the test code clean and focused on the test scenario.
 
-Given - The user provided correct credentials
-
-When - Login button is clicked
-
-Then - User is taken to the discover profiles screen
-
-#### Scenario 4 - User opens app next time (when previously logged in)
-
-Given - The user opens app next time (when previously logged in)
-
-Then - User is taken straight to the discover screen
-
- ##
-
-### 2 - As a user I want to like dating profiles
-
-#### Scenario 1 - Profiles are loaded
-
-Given - The user successfully logged in to the app
-
-When - There is internet connection
-
-Then - Profiles are displayed
-
-#### Scenario 2 - Failed to Profiles
-
-Given - The user successfully logged in to the app
-
-When - There is no internet connection
-
-Then - “Failed to profiles” error message is displayed with a Retry button
-
-#### Scenario 3 - liking profiles
-
-Given - The dating profiles are successfully loaded on the screen
-
-When - The user likes one or more of the profiles
-
-Then - after 5 lkes/passes, the user should see the correct number of profiles liked
-
-#### Login credentials:
-#### user: user
-#### password: password
-
-##
-
-We expect that these functions will be tested both manually and automatically by you.
-
-### Manual tests - We expect that any bugs will be reported in clear form
-
-### Automated tests - Using jetpack compose test or any other tool of your choosing (explain why)
-
-* At Muzz we love clean code so please try to write your tests neatly.
-
-* It’s not mandatory but using an additional abstraction level for your tests (like POM or your own framework to facilitate writing tests) will be very much appreciated
-
-* As a note, we won't consider any automation task submission created with a test recorder.
-
-* Tests should pass even if device locale is changed i.e. tests in French
-
-At Muzz we highly appreciate good communication at all times. If you have any questions, please don’t hesitate to ask us :)
-
-### Next Steps
-Once we have received your test along with any other documentation which you feel is necessary for your submission, we will review it. If we like what we see, we'll invite you into our office for
-a face to face discussion where we’ll ask you to go through your test, explaining any decisions that you've made.
-
-## Good luck!
+This approach makes the test suite scalable and resilient to UI changes.
