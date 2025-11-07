@@ -1,0 +1,45 @@
+# This is the name of our workflow. It will appear in the GitHub Actions tab.
+name: Run Android CI Tests
+
+# This section defines when the workflow will run.
+on:
+  # Run on every push to the main branch.
+  push:
+    branches: [ "main" ]
+  # Run on every pull request that targets the main branch.
+  pull_request:
+    branches: [ "main" ]
+
+# This section defines the jobs to be run. We only have one job: "test".
+jobs:
+  test:
+    # The type of virtual machine to run the job on. For Android, macOS is a good choice.
+    runs-on: macos-latest
+
+    steps:
+      # Step 1: Check out the code from your repository.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the correct Java version. Our project needs Java 17.
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      # Step 3: Grant execute permission to the Gradle wrapper script.
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Step 4: Run the Android emulator.
+      # This is the most complex step. We use a powerful community action
+      # that handles all the complexity of starting a headless emulator for us.
+      - name: Run Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33 # The Android API level for the emulator
+          target: default
+          arch: x86_64
+          script: ./gradlew app:connectedAndroidTest # The command to run AFTER the emulator is ready
