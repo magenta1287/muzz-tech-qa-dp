@@ -29,13 +29,18 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      # Step 3: Grant execute permission to the Gradle wrapper script.
+      # Step 3: Create the local.properties file from GitHub Secrets
+      # This is the crucial step to provide credentials to the build securely.
+      - name: Create local.properties
+        run: |
+          echo "TEST_USER=${{ secrets.TEST_USER }}" >> local.properties
+          echo "TEST_PASS=${{ secrets.TEST_PASS }}" >> local.properties
+
+      # Step 4: Grant execute permission to the Gradle wrapper script.
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Step 4: Run the Android emulator.
-      # This is the most complex step. We use a powerful community action
-      # that handles all the complexity of starting a headless emulator for us.
+      # Step 5: Run the Android emulator and tests.
       - name: Run Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
